@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 
-import {
-  View,
-  Text,
-  Keyboard,
-  Animated,
-  Platform,
-  ImageBackground,
-  StyleSheet
-} from 'react-native';
+import { View, Text, Keyboard, Animated, Platform } from 'react-native';
 
 import style from './style';
 import Locale from './Locale';

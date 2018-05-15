@@ -1,27 +1,23 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 import expo from 'expo';
+import { createStackNavigator } from 'react-navigation';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
+import HomeScreen from './screens/HomeScreen';
+import { homeScreen } from './constants/ScreenNameConstants';
+
+EStyleSheet.build({
+  $themeBackgroundColor: '#4F6D7A',
+  $darkText: '#868686'
+});
+
+const RootStackNavigator = createStackNavigator({
+  [homeScreen]: {
+    screen: HomeScreen,
+    navigationOptions: {
+      header: null
+    }
   }
 });
 
-class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <Text>Yooo hoo</Text>
-      </View>
-    );
-  }
-}
-
-export default expo.registerRootComponent(App);
+export default expo.registerRootComponent(() => <RootStackNavigator />);

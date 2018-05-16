@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { func } from 'prop-types';
+import { func, object } from 'prop-types';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -14,6 +14,7 @@ import LastConverted from '../../components/LastConverted';
 import CurrenciesSwap from '../../components/CurrenciesSwap';
 import CurrenciesConversionActions from '../../actions/CurrenciesConversionActions';
 import LoadingOverlay from '../../components/LoadingOverlay';
+import { currencySelectionScreen } from '../../constants/ScreenNameConstants';
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -25,8 +26,19 @@ class HomeScreen extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getExchangeRates();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      CurrenciesConversion: { rates }
+    } = nextProps;
+    if (rates) {
+      this.props.navigation.navigate(currencySelectionScreen, {
+        actionType: 'CHANGE_BASE_CURRENCY'
+      });
+    }
   }
 
   handleSwapCurrencies = () => {
@@ -50,7 +62,7 @@ class HomeScreen extends Component {
       CurrenciesConversion: { loading, base, quote, rates }
     } = this.props;
     const { baseValue, quoteValue } = this.state;
-    console.log(quoteValue);
+
     return (
       <ScreenContainer>
         <LoadingOverlay visible={loading} />
@@ -91,7 +103,8 @@ class HomeScreen extends Component {
 
 HomeScreen.propTypes = {
   getExchangeRates: func.isRequired,
-  swapCurrencies: func.isRequired
+  swapCurrencies: func.isRequired,
+  CurrenciesConversion: object.isRequired
 };
 
 export default connect(

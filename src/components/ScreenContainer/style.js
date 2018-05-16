@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const styles = EStyleSheet.create({
+export default EStyleSheet.create({
   container: {
     paddingLeft: 15,
     paddingRight: 15,
@@ -11,5 +11,3 @@ const styles = EStyleSheet.create({
     flex: 1
   }
 });
-
-export default styles;

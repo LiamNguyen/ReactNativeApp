@@ -16,8 +16,8 @@
   ],
   "rules": {
     "no-undef-init": 0,
-    "no-unused-vars": "off",
-    "no-console": "off",
+    "no-unused-vars": "error",
+    "no-console": "error",
     "no-undef": 2,
     "quotes": ["off", "single"],
     "arrow-spacing": "error",

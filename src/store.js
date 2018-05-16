@@ -8,7 +8,7 @@ import reducers from './reducers';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [sagaMiddleware];
 
-export default (create = (initialState = {}) => {
+export default (initialState = {}) => {
   // Create store
   const store = createStore(
     reducers,
@@ -20,4 +20,4 @@ export default (create = (initialState = {}) => {
     sagaMiddleware.run(sagas);
   }
   return store;
-});
+};

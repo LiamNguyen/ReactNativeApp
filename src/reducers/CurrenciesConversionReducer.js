@@ -5,7 +5,8 @@ const {
   GET_EXCHANGE_RATES,
   SWAP_CURRENCIES,
   CHANGE_BASE_CURRENCY,
-  CHANGE_QUOTE_CURRENCY
+  CHANGE_QUOTE_CURRENCY,
+  UPDATE_FILTERED_RATES
 } = CurrenciesConversionConstants;
 
 export const getInitialState = () => ({
@@ -13,7 +14,8 @@ export const getInitialState = () => ({
   errors: {},
   base: 'EUR',
   quote: 'USD',
-  rates: {}
+  rates: [],
+  filteredRates: []
 });
 
 export default createReducer(getInitialState, {
@@ -23,7 +25,8 @@ export default createReducer(getInitialState, {
   }),
   [`${GET_EXCHANGE_RATES}_SUCCESS`]: (state, { payload: { rates } }) => ({
     loading: false,
-    rates
+    rates,
+    filteredRates: rates
   }),
   [`${GET_EXCHANGE_RATES}_FAILURE`]: (state, { payload: { errors } }) => ({
     loading: false,
@@ -42,5 +45,8 @@ export default createReducer(getInitialState, {
   }),
   [CHANGE_QUOTE_CURRENCY]: (state, { payload: { quote } }) => ({
     quote
+  }),
+  [UPDATE_FILTERED_RATES]: (state, { payload: { filteredRates } }) => ({
+    filteredRates
   })
 });

@@ -5,11 +5,13 @@ import {
   watchSwapCurrencies,
   watchChangeBase
 } from './exchangeRates';
+import { watchSearchBaseOrQuote } from './searchBaseOrQuote';
 
 export default function* root() {
   yield all([
     fork(watchGetExchangeRates),
     fork(watchSwapCurrencies),
-    fork(watchChangeBase)
+    fork(watchChangeBase),
+    fork(watchSearchBaseOrQuote)
   ]);
 }

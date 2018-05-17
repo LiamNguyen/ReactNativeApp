@@ -4,7 +4,8 @@ const {
   GET_EXCHANGE_RATES,
   SWAP_CURRENCIES,
   CHANGE_BASE_CURRENCY,
-  CHANGE_QUOTE_CURRENCY
+  CHANGE_QUOTE_CURRENCY,
+  SEARCH_BASE_OR_QUOTE
 } = CurrenciesConversionConstants;
 
 export const getExchangeRates = () => ({
@@ -16,7 +17,7 @@ export const swapCurrencies = () => ({
 });
 
 export const changeBaseCurrency = base => ({
-  type: `${CHANGE_BASE_CURRENCY}`,
+  type: CHANGE_BASE_CURRENCY,
   payload: { base }
 });
 
@@ -25,9 +26,15 @@ export const changeQuoteCurrency = quote => ({
   payload: { quote }
 });
 
+export const searchBaseOrQuote = query => ({
+  type: SEARCH_BASE_OR_QUOTE,
+  payload: { query }
+});
+
 export default {
   getExchangeRates,
   swapCurrencies,
   changeBaseCurrency,
-  changeQuoteCurrency
+  changeQuoteCurrency,
+  searchBaseOrQuote
 };

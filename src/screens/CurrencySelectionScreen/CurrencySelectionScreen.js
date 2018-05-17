@@ -19,6 +19,10 @@ class CurrencySelectionScreen extends Component {
     this.props.navigation.goBack();
   };
 
+  handleSearchQuery = query => {
+    this.props.searchBaseOrQuote(query);
+  };
+
   handleCurrencyChosen = item => {
     const {
       navigation: {
@@ -45,10 +49,10 @@ class CurrencySelectionScreen extends Component {
           params: { actionType }
         }
       },
-      CurrenciesConversion: { base, quote, rates }
+      CurrenciesConversion: { base, quote, filteredRates }
     } = this.props;
     const currentCurrency = actionType === CHANGE_BASE_CURRENCY ? base : quote;
-    const currencies = Object.keys(rates).sort();
+    const currencies = filteredRates.map(rate => rate.currency).sort();
 
     return (
       <ScreenContainer customStyle={style.screenContainer}>
@@ -58,6 +62,7 @@ class CurrencySelectionScreen extends Component {
           placeholder="Search currency"
           placeholderTextColor="white"
           returnKeyType="done"
+          onChangeText={this.handleSearchQuery}
         />
         <CurrencyList
           currencies={currencies}
@@ -73,6 +78,7 @@ CurrencySelectionScreen.propTypes = {
   navigation: object.isRequired,
   changeBaseCurrency: func.isRequired,
   changeQuoteCurrency: func.isRequired,
+  searchBaseOrQuote: func.isRequired,
   CurrenciesConversion: object.isRequired
 };
 

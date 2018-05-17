@@ -70,9 +70,10 @@ class HomeScreen extends Component {
     const {
       CurrenciesConversion: { quote, rates }
     } = this.props;
+    const { rate } = rates.find(rate => rate.currency === quote);
     const quoteValue = _.isEmpty(baseValue)
       ? ''
-      : `${(baseValue * rates[quote]).toFixed(4)}`;
+      : `${(baseValue * rate).toFixed(4)}`;
 
     this.setState({ baseValue, quoteValue });
   };
@@ -81,6 +82,7 @@ class HomeScreen extends Component {
     const {
       CurrenciesConversion: { loading, base, quote, rates }
     } = this.props;
+    const currentRate = rates.find(rate => rate.currency === quote);
     const { baseValue, quoteValue } = this.state;
 
     return (
@@ -109,7 +111,7 @@ class HomeScreen extends Component {
                 date={moment()}
                 base={base}
                 quote={quote}
-                conversionRate={rates[quote]}
+                conversionRate={currentRate.rate || 0}
               />
             )}
             <CurrenciesSwap onPress={this.handleSwapCurrencies} />

@@ -2,6 +2,7 @@ import { takeEvery, call, put, select } from 'redux-saga/effects';
 
 import CurrenciesConversionConstants from '../constants/CurrenciesConversionConstants';
 import ExchangeRatesRepository from '../repositories/ExchangeRatesRepository';
+import Helper from '../lib/Helper';
 
 const {
   GET_EXCHANGE_RATES,
@@ -40,15 +41,16 @@ function* getExchangeRates() {
     });
     const { rates } = response;
     // Insert rates for base EUR
-    let customRate = rates;
+    let customRates = rates;
 
     if (base === 'EUR') {
-      customRate['EUR'] = 1;
+      customRates['EUR'] = 1;
     }
+    const ratesArray = Helper.convertRatesObjectToArray(customRates);
 
     yield put({
       type: `${GET_EXCHANGE_RATES}_SUCCESS`,
-      payload: { rates: customRate }
+      payload: { rates: ratesArray }
     });
   } catch (errors) {
     yield put({

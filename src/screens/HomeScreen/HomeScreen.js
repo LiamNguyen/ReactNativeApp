@@ -15,6 +15,12 @@ import CurrenciesSwap from '../../components/CurrenciesSwap';
 import CurrenciesConversionActions from '../../actions/CurrenciesConversionActions';
 import LoadingOverlay from '../../components/LoadingOverlay';
 import { currencySelectionScreen } from '../../constants/ScreenNameConstants';
+import CurrenciesConversionConstants from '../../constants/CurrenciesConversionConstants';
+
+const {
+  CHANGE_BASE_CURRENCY,
+  CHANGE_QUOTE_CURRENCY
+} = CurrenciesConversionConstants;
 
 class HomeScreen extends Component {
   constructor(props) {
@@ -26,20 +32,34 @@ class HomeScreen extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    const {
+      CurrenciesConversion: { base: newBase, quote: newQuote }
+    } = nextProps;
+    const {
+      CurrenciesConversion: { base: oldBase, quote: oldQuote }
+    } = this.props;
+
+    if (newBase !== oldBase || newQuote !== oldQuote) {
+      this.setState({ baseValue: '', quoteValue: '' });
+    }
+  }
+
   componentDidMount() {
     this.props.getExchangeRates();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {
-      CurrenciesConversion: { rates }
-    } = nextProps;
-    if (rates) {
-      this.props.navigation.navigate(currencySelectionScreen, {
-        actionType: 'CHANGE_BASE_CURRENCY'
-      });
-    }
-  }
+  handleBaseChange = () => {
+    this.props.navigation.navigate(currencySelectionScreen, {
+      actionType: CHANGE_BASE_CURRENCY
+    });
+  };
+
+  handleQuoteChange = () => {
+    this.props.navigation.navigate(currencySelectionScreen, {
+      actionType: CHANGE_QUOTE_CURRENCY
+    });
+  };
 
   handleSwapCurrencies = () => {
     this.setState({ baseValue: '', quoteValue: '' });
@@ -74,7 +94,7 @@ class HomeScreen extends Component {
               buttonText={base}
               editable
               keyboardType="numeric"
-              onPress={() => {}}
+              onPress={this.handleBaseChange}
               onChangeText={this.handleBaseValueChange}
             />
             <CurrencyInput
@@ -82,8 +102,7 @@ class HomeScreen extends Component {
               buttonText={quote}
               editable={false}
               keyboardType="numeric"
-              onPress={() => {}}
-              onChangeText={() => {}}
+              onPress={this.handleQuoteChange}
             />
             {!_.isEmpty(quoteValue) && (
               <LastConverted

@@ -48,6 +48,7 @@ class CurrencySelectionScreen extends Component {
       CurrenciesConversion: { base, quote, rates }
     } = this.props;
     const currentCurrency = actionType === CHANGE_BASE_CURRENCY ? base : quote;
+    const currencies = Object.keys(rates).sort();
 
     return (
       <ScreenContainer customStyle={style.screenContainer}>
@@ -59,7 +60,7 @@ class CurrencySelectionScreen extends Component {
           returnKeyType="done"
         />
         <CurrencyList
-          currencies={Object.keys(rates)}
+          currencies={currencies}
           onCurrencyChosen={this.handleCurrencyChosen}
           currentCurrency={currentCurrency}
         />

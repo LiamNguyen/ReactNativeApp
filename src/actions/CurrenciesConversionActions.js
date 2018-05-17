@@ -16,7 +16,7 @@ export const swapCurrencies = () => ({
 });
 
 export const changeBaseCurrency = base => ({
-  type: `${CHANGE_BASE_CURRENCY}_REQUEST`,
+  type: `${CHANGE_BASE_CURRENCY}`,
   payload: { base }
 });
 

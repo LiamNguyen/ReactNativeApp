@@ -22,7 +22,7 @@ CurrencyInput.propTypes = {
   onPress: func.isRequired,
   buttonText: string.isRequired,
   editable: bool,
-  onChangeText: func.isRequired
+  onChangeText: func
 };
 
 export default CurrencyInput;

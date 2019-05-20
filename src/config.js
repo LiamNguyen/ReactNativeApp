@@ -4,7 +4,7 @@ let apiHost = '';
 export default {
   init() {
     env = 'production';
-    apiHost = 'https://exchangeratesapi.io';
+    apiHost = 'https://api.exchangeratesapi.io';
   },
 
   get apiHost() {

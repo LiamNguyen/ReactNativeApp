@@ -5,6 +5,6 @@ export default {
     return config.apiHost;
   },
   getExchangeRates() {
-    return `${this.base}/api/latest`;
+    return `${this.base}/latest`;
   }
 };

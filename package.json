@@ -11,10 +11,8 @@
   },
   "main": "src/App.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "NODE_ENV=development&& react-native-scripts ios",
+    "start": "expo start",
+    "eject": "expo eject",
     "test": "jest",
     "format": "prettier --single-quote --write \"src/**/*.js\" \"*.js\"",
     "postinstall": "rndebugger-open --expo"
@@ -28,8 +26,8 @@
     "md5": "^2.2.1",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
-    "react": "16.3.2",
-    "react-native": "~0.55.2",
+    "react": "16.3.1",
+    "react-native": "0.55.4",
     "react-native-extended-stylesheet": "^0.8.1",
     "react-native-indicators": "^0.13.0",
     "react-navigation": "^2.0.1",
